@@ -8,7 +8,7 @@ import { prepareContractCall, readContract, sendAndConfirmTransaction } from "th
 import { CONTRACT } from "@/blockchain/constants";
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
-import { QrcodeResult } from "html5-qrcode/core";
+import {QrcodeResult, QrcodeResultFormat} from "html5-qrcode/core";
 
 export default function Home() {
     const activeAccount = useActiveAccount();
@@ -119,9 +119,11 @@ export default function Home() {
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Scan the Ticket QR Code</h2>
             <div className="w-full max-w-lg bg-white shadow-lg rounded-lg p-4 border">
                 <QrReader
-                    onResult={(result: QrcodeResult, error: Error) => {
-                        if (result?.text) {
-                            setTokenId(result.text);
+                    constraints={{ facingMode: "environment" }} // Uses the back camera
+                    onResult={(result, error) => {
+                        if (result) {
+                            const scannedText = result.getText(); // Use getText() instead of accessing text directly
+                            setTokenId(scannedText);
                         }
                         if (error) {
                             console.info(error);
