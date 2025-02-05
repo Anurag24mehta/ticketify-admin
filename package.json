@@ -20,6 +20,7 @@
     "pino-pretty": "^7.0.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-qr-reader": "^3.0.0-beta-1",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
     "thirdweb": "^5.87.2"
